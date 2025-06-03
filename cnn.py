@@ -50,7 +50,11 @@ transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
+label_map = {'A': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5,
+             '7': 6, '8': 7, '9': 8, '10': 9, 'J': 10, 'Q': 11, 'K': 12}
+
 dataset = SafeImageFolder('dataset/', transform=transform)
+dataset.class_to_idx = label_map
 train_loader = DataLoader(dataset, batch_size=32, shuffle=True)
 model = CardClassifier(num_classes=13).to(device)
 # ==== end ====
